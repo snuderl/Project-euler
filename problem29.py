@@ -1,16 +1,8 @@
-import mathTools
 
-n = 0
-used = [False]*101
-a=mathTools.gen_primes()
-for x in xrange(2,101):
-	if(used[x]): continue
-	n+=99
-	used[x]=True
-	while(True):
-		x=x*x
-		if(x>100): break
-		n+=44
-		used[x]=True
+terms = {}
 
-print n
+for x in range(2,101):
+	for y in range(2,101):
+		terms[x**y]=1
+
+print len(terms.keys())

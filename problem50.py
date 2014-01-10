@@ -1,37 +1,23 @@
-def primes_sieve1(limit):
-    limitn = limit+1
-    primes = dict()
-    for i in range(2, limitn): primes[i] = True
-
-    for i in primes:
-        factors = range(i,limitn, i)
-        for f in factors[1:]:
-            primes[f] = False
-    return [i for i in primes if primes[i]==True]
-
-
-
+from utils import primes_to_n, prime_sieve
+from itertools import takewhile
 import time
 
-
-
 start = time.time()
+BOUND = 1000000
+current = (0,1)
 
-primes = primes_sieve1(1000)
-n=0
-r,s = 0,0
-g = 0
-for i in primes:
-	n+=i
-	g+=1
-	if n>1000:
-		break
-
-	if n in primes:
-		r=n
-		s=g
-print r,g
-print time.time()-start
+primes = list(takewhile(lambda x: x < 1000000, prime_sieve()))
+print ("Primes generated")
+for i in range(1, len(primes)):
+	for y in range(0, i):
+		if i-y > current[0]:
+			slice = primes[y:i]
+			s = sum(slice)
+			if(s in primes):
+				current = (i-y, s)
+				print(current)
+print (current)
+print (time.time() - start)
 
 	
 
