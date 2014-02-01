@@ -20,9 +20,30 @@ def prime_sieve():
     n = 3
     while True:
         n += 2
-        if not any(map(lambda x: n % x == 0), primes):
+        if not any(map(lambda x: n % x == 0, primes)):
             primes.append(n)
             yield n
+
+def primes_sieve2(n):
+    table = [False] + [True, False] * (n / 2)
+    if n % 2 == 1:
+        table.append(True)
+    primes = []
+    for x in range(3, int(n ** 0.5 + 1), 2):
+        if table[x]:
+            table[x * x :: x] = [False] * int((n - x * x) / x + 1)
+            primes.append(x)
+
+    for y in range(int(n ** 0.5 + 1), n):
+        if table[y]:      
+            primes.append(y)
+
+    return [2] + primes
+
+
+#for x in range(2, 100):
+    #print (primes_sieve2(x))
+print sum(primes_sieve2(10**6))
 
 
 def get_primes(n):
@@ -77,8 +98,8 @@ def memoize(fun):
             return res
     return inner
 
-primesList = primes(10000000)
-primesSet = set(primesList)
+#primesList = primes(10000000)
+#primesSet = set(primesList)
 
 @memoize
 def factors(x):    
@@ -110,7 +131,7 @@ def phi(x):
             else:
                 return phi(s) * (p ** (c - 1) * (p - 1))
 
-print phi(99)
+#print phi(99)
 
 def arePermutations(str1, str2):
   s1 = "".join(sorted(str1))
