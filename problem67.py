@@ -1,23 +1,13 @@
 fileName = "triangle.txt"
-file = open(fileName)
-a = []
-for line in file:
-	line=line[:len(line)-1]
-	a.append(line)
 
-
-parsed =[]
-for counter,line in enumerate(a):
-	parsed.append(line.split(" "))
-
+parsed = [map(int, x.split()) for x in open(fileName)]
 parsed.reverse()
-parsed = [map(int, x) for x in parsed]
-
 
 import time
 start = time.time()
+###Build a trinagle of shortest paths starting from the bottom
 for counter,line in enumerate(parsed):
-	for i,current in enumerate(line):
+	for i, current in enumerate(line):
 		if(i==len(line)-1):
 			continue
 		next=line[i+1]
@@ -28,4 +18,4 @@ for counter,line in enumerate(parsed):
 
 print parsed[-1][-1]
 
-print time.time()-start
+print time.time() - start

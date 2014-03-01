@@ -12,6 +12,17 @@ def primes(n):
                 int((n - i * i - 1) / (2 * i) + 1)
     return [2] + [2 * i + 1 for i in range(1, int(n / 2)) if sieve[i]]
 
+def factor(x, pr=None):
+    if not pr:
+        pr = primes(int(x)+1)
+    s = []
+    for p in pr:
+        while x % p == 0:
+            s.append(p)
+            x = x / p
+
+    return s
+
 
 def prime_sieve():
     primes = [2, 3]
@@ -43,7 +54,7 @@ def primes_sieve2(n):
 
 #for x in range(2, 100):
     #print (primes_sieve2(x))
-print sum(primes_sieve2(10**6))
+#print sum(primes_sieve2(10**6))
 
 
 def get_primes(n):

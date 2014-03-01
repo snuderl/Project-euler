@@ -1,0 +1,11 @@
+cnt = 0
+BOUND = int(500000/2)
+for i1 in 1:BOUND
+    sq1 = i1*i1
+    for i2 in i1:BOUND
+        sq2 = i2 * i2
+        for i3 in i2:BOUND
+            s = sq1 + sq2 + i3*i3
+        end
+    end
+end
