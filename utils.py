@@ -17,6 +17,7 @@ def factor(x, pr=None):
         pr = primes(int(x)+1)
     s = []
     for p in pr:
+        if p > x: break
         while x % p == 0:
             s.append(p)
             x = x / p
